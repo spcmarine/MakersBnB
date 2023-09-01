@@ -1,11 +1,22 @@
 import os
 from flask import Flask, request, render_template
 from lib.database_connection import get_flask_database_connection
+from lib.spaces_repository import Spacerepository
+from lib.spaces import Spaces
 
 # Create a new Flask app
 app = Flask(__name__)
 
 # == Your Routes Here ==
+
+@app.route('/spaces', methods = ['GET'])
+def all_spaces():
+    connection = get_flask_database_connection(app)
+    repository = Spacerepository(connection)
+    return ', '.join([
+            str(space) for space in repository.all()
+        ])
+
 
 # GET /index
 # Returns the homepage
