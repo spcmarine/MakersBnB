@@ -22,16 +22,18 @@ def get_index():
 def signup():
     return render_template('signup.html')
 
-@app.route('/newuser', methods=[Ç'POST'])
+@app.route('/newuser', methods=['GET', 'POST'])
 def new_user():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
-    username = request.form['username'],
-    fullname = request.form['fullname'],
-    password = request.form['password']
-    user = User(None, username, fullname, password)
-    repository.create(user)
-    return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        username = request.form['username']
+        fullname = request.form['fullname']
+        password = request.form['password']
+        user = User(None, username, fullname, password)
+        repository.create(user)
+        return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
