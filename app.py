@@ -9,15 +9,6 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
-@app.route('/spaces', methods = ['GET'])
-def all_spaces():
-    connection = get_flask_database_connection(app)
-    repository = Spacerepository(connection)
-    return ', '.join([
-            str(space) for space in repository.all()
-        ])
-
-
 # GET /index
 # Returns the homepage
 # Try it:
@@ -36,11 +27,19 @@ def login():
         result = connection.execute('SELECT * FROM users where username = %s AND password = %s', (username, password,))
         user = result
         if user:
-            return redirect(url_for('profile'))
+            return redirect(url_for('all_spaces'))
         else:
             message = 'please enter correct username and password'
     else:
         return render_template('login.html', message=message)
+    
+@app.route('/spaces', methods = ['GET'])
+def all_spaces():
+    connection = get_flask_database_connection(app)
+    repository = Spacerepository(connection)
+    return ', '.join([
+            str(space) for space in repository.all()
+        ])
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
