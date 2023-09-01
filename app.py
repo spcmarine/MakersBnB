@@ -3,6 +3,8 @@ from flask import Flask, request, render_template, redirect, url_for
 from lib.database_connection import get_flask_database_connection
 from lib.spaces_repository import Spacerepository
 from lib.spaces import Spaces
+from lib.users import User
+from lib.users_repository import UserRepository
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -16,6 +18,20 @@ app = Flask(__name__)
 @app.route('/index', methods=['GET'])
 def get_index():
     return render_template('index.html')
+@app.route('/newuser/new', methods=['GET'])
+def signup():
+    return render_template('signup.html')
+
+@app.route('/newuser', methods=[Ç'POST'])
+def new_user():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    username = request.form['username'],
+    fullname = request.form['fullname'],
+    password = request.form['password']
+    user = User(None, username, fullname, password)
+    repository.create(user)
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
