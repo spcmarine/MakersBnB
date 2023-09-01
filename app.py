@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from lib.database_connection import get_flask_database_connection
 
 # Create a new Flask app
@@ -14,6 +14,22 @@ app = Flask(__name__)
 @app.route('/index', methods=['GET'])
 def get_index():
     return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    message = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        connection = get_flask_database_connection(app)
+        result = connection.execute('SELECT * FROM users where username = %s AND password = %s', (username, password,))
+        user = result
+        if user:
+            return redirect(url_for('profile'))
+        else:
+            message = 'please enter correct username and password'
+    else:
+        return render_template('login.html', message=message)
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
