@@ -1,36 +1,54 @@
-# MakersBnB Python Project Seed
+<h1 align="center">
+ MakersBnB
+</h1>
 
-This repo contains the seed codebase for the MakersBnB project in Python (using 
-Flask and Pytest).
+<p align="center">
+  The brief for this project was to build an AirBnB style web app, completed as part of Makers Academy Bootcamp during Week 8.
+  This was a team effort by myself and 3 others. 
+</p>
 
-Someone in your team should fork this seed repo to their Github account. 
-Everyone in the team should then clone this fork to their local machine to work on it.
 
-## Setup
+## 🚀 Tech stack
 
-```shell
-# Install dependencies and set up the virtual environment
-; pipenv install
+ <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"> <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"> <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white">
 
-# Activate the virtual environment
-; pipenv shell
+## 💻 Running the project
 
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
+<b>Clone the project to your local machine.</b>
 
-# Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_TEST
-
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
-
-# Run the tests (with extra logging)
-; pytest -sv
-
-# Run the app
-; python app.py
-
-# Now visit http://localhost:5000/index in your browser
 ```
+git clone https://github.com/denisecodes/makersbnb.git
+```
+
+<b>Run pipenv install to install all the dependencies.</b>
+
+```
+pipenv install
+```
+
+<b>Run pipenv shell to start the virtual environment.</b>
+
+```
+pipenv shell
+```
+<b>Create the database <i>makers_bnb</i> for development mode.</b>
+
+``` 
+createdb makers_bnb
+```
+
+<b>Then add the tables locally to the makers_bnb database.</b>
+
+``` 
+python seed_dev_database.py
+```
+
+<b>Run the app locally in the shell.</b>
+
+```
+python app.py
+```
+
+Now visit http://localhost:8000/ to see the app 
+
+
